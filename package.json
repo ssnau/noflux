@@ -1,0 +1,38 @@
+{
+  "name": "noflux",
+  "version": "1.0.0",
+  "description": "a simple top down data flow implementation",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "test": "mocha --compilers js:babel/register",
+    "coverage": "mocha --compilers js:babel/register -R html-cov > coverage.html",
+    "coverage-lcov": "mocha --compilers js:babel/register -R mocha-lcov-reporter > lcov.info",
+    "coverage-json": "mocha --compilers js:babel/register -R json-cov > coverage.json",
+    "build": "babel lib --out-dir dist && rm -rf dist/__tests__"
+  },
+  "browserify": {
+    "transform": [
+      "envify"
+    ]
+  },
+  "keywords": [
+    "flux",
+    "noflux"
+  ],
+  "author": "liuxijin",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.4.7",
+    "blanket": "^1.1.7",
+    "expect.js": "^0.3.1",
+    "jsdom": "^5.4.3",
+    "mocha": "^2.2.5",
+    "mocha-lcov-reporter": "0.0.2",
+    "react": ">0.10",
+    "sinon": "^1.14.1"
+  },
+  "dependencies": {
+    "dataton": "^1.5.1"
+  }
+}
