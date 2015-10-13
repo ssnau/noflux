@@ -7,5 +7,5 @@ module.exports = {
   },
 
   state: require('./dist/state'),
-  State: require('state2')
+  State: require('dataton')
 };
