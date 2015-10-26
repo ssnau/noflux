@@ -57,6 +57,7 @@ A instance of [dataton](http://npmjs.com/package/dataton) which implemented Copy
 - `cursor`: get the `cursor` from the provided path.
 
 
+
 License
 ----
 
