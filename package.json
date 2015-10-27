@@ -35,5 +35,16 @@
   "dependencies": {
     "envify": "^3.0.0",
     "dataton": "^1.5.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssnau/noflux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ssnau/noflux/issues"
+  },
+  "homepage": "https://github.com/ssnau/noflux#readme"
 }
