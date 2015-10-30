@@ -43,4 +43,27 @@ describe('decorate', function () {
     state.cursor('name').update('john'); // will make the component rerender
     assert.equal(node.getDOMNode().id, 'john');
   });
+
+  it('you can connect to any datasource you want', function () {
+
+    var Connect = noflux.Connect;
+    var state = new noflux.State();
+    var gstate = noflux.state;
+    state.load({});
+    var nameCursor = state.cursor('name');
+    nameCursor.update('jack');
+
+    @Connect(state)
+    class App extends React.Component {
+      render() {
+        return <h1 id={nameCursor()}></h1>;
+      }
+    }
+    var component = TestUtils.renderIntoDocument(<App />);
+    var node = TestUtils.findRenderedDOMComponentWithTag(component, 'h1')
+    assert.equal(node.getDOMNode().id, 'jack');
+    state.cursor('name').update('john'); // will make the component rerender
+    gstate.cursor('name').update('ppp');
+    assert.equal(node.getDOMNode().id, 'john');
+  });
 });
