@@ -15,13 +15,13 @@ require('blanket')({
 var expect = require('expect.js');
 var sinon = require('sinon');
 var assert = require('assert');
-//require('../dist/config').muteConsole = true; // mute console first
+require('../dist/config').muteConsole = true; // mute console first
 var noflux = require('../');
 var state = noflux.state;
-var React = require('react/addons');
+var React = require('react');
 // mute console
 
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 
 describe('decorate', function () {
 
@@ -39,9 +39,9 @@ describe('decorate', function () {
     }
     var component = TestUtils.renderIntoDocument(<App />);
     var node = TestUtils.findRenderedDOMComponentWithTag(component, 'h1')
-    assert.equal(node.getDOMNode().id, 'jack');
+    assert.equal(node.id, 'jack');
     state.cursor('name').update('john'); // will make the component rerender
-    assert.equal(node.getDOMNode().id, 'john');
+    assert.equal(node.id, 'john');
   });
 
   it('you can connect to any datasource you want', function () {
@@ -61,9 +61,9 @@ describe('decorate', function () {
     }
     var component = TestUtils.renderIntoDocument(<App />);
     var node = TestUtils.findRenderedDOMComponentWithTag(component, 'h1')
-    assert.equal(node.getDOMNode().id, 'jack');
+    assert.equal(node.id, 'jack');
     state.cursor('name').update('john'); // will make the component rerender
     gstate.cursor('name').update('ppp');
-    assert.equal(node.getDOMNode().id, 'john');
+    assert.equal(node.id, 'john');
   });
 });

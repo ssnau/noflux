@@ -1,6 +1,9 @@
 'use strict';
 
+var win = typeof window !== 'undefined' ? window : { __noflux_env: 'production' };
 module.exports = {
     muteConsole: false,
-    isDev: 'production' !== process.env.NODE_ENV
+    isDev: function isDev() {
+        return win.__noflux_env !== 'production';
+    }
 };

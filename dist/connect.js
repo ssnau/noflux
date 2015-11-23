@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports["default"] = connect;
+exports['default'] = connect;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _state = require('./state');
 
@@ -13,18 +13,14 @@ var _state2 = _interopRequireDefault(_state);
 
 var _config = require("./config");
 
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var allowConsole = _config.isDev && !_config.muteConsole && typeof console !== 'undefined';
-
-if (typeof window !== 'undefined') window.React = _react2["default"];
+var allowConsole = function allowConsole(_) {
+  return (0, _config.isDev)() && !_config.muteConsole && typeof console !== 'undefined';
+};
 
 function noop() {}
 
 function connect(clazz, data) {
-  var datasource = data || _state2["default"];
+  var datasource = data || _state2['default'];
   var on = function on(eventname, callback) {
     datasource.on(eventname, callback);
     return {
@@ -41,9 +37,9 @@ function connect(clazz, data) {
 
     handler = on('change', function () {
       /*eslint-disable no-console */
-      allowConsole && console.time && console.time('全文档重渲染耗时');
+      allowConsole() && console.time && console.time('全文档重渲染耗时');
       _this.forceUpdate(function () {
-        allowConsole && console.timeEnd && console.timeEnd('全文档重渲染耗时');
+        allowConsole() && console.timeEnd && console.timeEnd('全文档重渲染耗时');
       });
       /*eslint-enable */
     });
@@ -58,4 +54,4 @@ function connect(clazz, data) {
   return clazz;
 }
 
-module.exports = exports["default"];
+module.exports = exports['default'];
