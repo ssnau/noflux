@@ -31,7 +31,7 @@ function connect(clazz, data) {
   };
 
   var origMidMount = clazz.prototype.componentDidMount || noop;
-  var handler;
+  var handler, mHandler;
   clazz.prototype.componentDidMount = function () {
     var _this = this;
 
@@ -43,11 +43,17 @@ function connect(clazz, data) {
       });
       /*eslint-enable */
     });
+    mHandler = on('message', function (data) {
+      if (/no-update/.test(data.type)) {
+        allowConsole() && console.log('调用了state的update方法但是未能触发页面更新,原因是传入值和已有值相同。 数据更新路径为' + data.path.join('/') + ", 传入值为" + JSON.stringify(data.value, null, 2));
+      }
+    });
     return origMidMount.call(this);
   };
   var origWillUmount = clazz.prototype.componentWillUnmount || noop;
   clazz.prototype.componentWillUnmount = function () {
     handler && handler.remove();
+    mHandler && mHandler.remove();
     return origWillUmount.call(this);
   };
 

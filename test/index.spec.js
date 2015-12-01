@@ -8,9 +8,11 @@ global.navigator.appVersion = '';
 
 window.SYNC_TIMEOUT = true;
 
+/*
 require('blanket')({
     pattern: 'dist'
 });
+*/
 
 var expect = require('expect.js');
 var sinon = require('sinon');
