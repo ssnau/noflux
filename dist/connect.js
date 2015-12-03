@@ -36,16 +36,17 @@ function connect(clazz, data) {
   };
 
   var origMidMount = clazz.prototype.componentDidMount || noop;
+  var name = clazz.name;
   var handler, mHandler;
   clazz.prototype.componentDidMount = function () {
     var _this = this;
 
     handler = on('change', function () {
       /*eslint-disable no-console */
-      allowConsole() && console.time && console.time('全文档重渲染耗时');
+      allowConsole() && console.time && console.time(name + '渲染耗时');
       if (_this.__isUnmounted) return; // prevent forceUpdate a unmounted component
       _this.forceUpdate(function () {
-        allowConsole() && console.timeEnd && console.timeEnd('全文档重渲染耗时');
+        allowConsole() && console.timeEnd && console.timeEnd(name + '渲染耗时');
       });
       /*eslint-enable */
     });
