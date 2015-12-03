@@ -19,6 +19,11 @@ var allowConsole = function allowConsole(_) {
 
 function noop() {}
 
+/**
+ * connect的作用在于，将给定的react class和指定的datasource连接。
+ * 当state上发出'change'事件时，react实例对象能触发.
+ */
+
 function connect(clazz, data) {
   var datasource = data || _state2['default'];
   var on = function on(eventname, callback) {
@@ -38,6 +43,7 @@ function connect(clazz, data) {
     handler = on('change', function () {
       /*eslint-disable no-console */
       allowConsole() && console.time && console.time('全文档重渲染耗时');
+      if (_this.__isUnmounted) return; // prevent forceUpdate a unmounted component
       _this.forceUpdate(function () {
         allowConsole() && console.timeEnd && console.timeEnd('全文档重渲染耗时');
       });
@@ -54,6 +60,7 @@ function connect(clazz, data) {
   clazz.prototype.componentWillUnmount = function () {
     handler && handler.remove();
     mHandler && mHandler.remove();
+    this.__isUnmounted = true;
     return origWillUmount.call(this);
   };
 
