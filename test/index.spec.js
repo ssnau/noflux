@@ -97,11 +97,21 @@ describe('decorate', function () {
     var component = TestUtils.renderIntoDocument(<App />);
     assert.equal(appRenderCount, 1);
     assert.equal(itemRenderCount, 1);
+
     state.set('___', 100);  // a dumb property to force redraw
     assert.equal(appRenderCount, 2);
     assert.equal(itemRenderCount, 1); // item would not redraw
+
     state.set('name', 'johnson');
     assert.equal(appRenderCount, 3);
     assert.equal(itemRenderCount, 2); // item would not redraw
+
+    state.set('name', 'joseph');
+    assert.equal(appRenderCount, 4);
+    assert.equal(itemRenderCount, 3); // item would not redraw
+
+    state.set('___', '332');
+    assert.equal(appRenderCount, 5);
+    assert.equal(itemRenderCount, 3); // item would not redraw
   });
 });
