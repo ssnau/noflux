@@ -44,7 +44,7 @@ function connect(clazz, data) {
     handler = on('change', function () {
       /*eslint-disable no-console */
       allowConsole() && console.time && console.time(name + '渲染耗时');
-      if (_this.__isUnmounted) return; // prevent forceUpdate a unmounted component
+      if (_this.__isUnmounted) return; // prevent forceUpdate an unmounted component
       _this.forceUpdate(function () {
         allowConsole() && console.timeEnd && console.timeEnd(name + '渲染耗时');
       });

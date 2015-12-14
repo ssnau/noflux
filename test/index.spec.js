@@ -68,4 +68,40 @@ describe('decorate', function () {
     gstate.cursor('name').update('ppp');
     assert.equal(node.id, 'john');
   });
+
+  it('pure render only redraw when cursor value changes', function () {
+    var pure = noflux.pure;
+    var connect = noflux.connect;
+    var state = new noflux.State();
+    state.load({name: 'jack'});
+
+    var itemRenderCount = 0;
+    var appRenderCount = 0;
+
+    @pure
+    class Item extends React.Component {
+      render() {
+        itemRenderCount++;
+        return <h1> hello </h1>
+      }
+    }
+    
+    @connect(state)
+    class App extends React.Component {
+      render() {
+        appRenderCount++;
+        return <Item data={state.cursor('name')} />
+      }
+    }
+
+    var component = TestUtils.renderIntoDocument(<App />);
+    assert.equal(appRenderCount, 1);
+    assert.equal(itemRenderCount, 1);
+    state.set('___', 100);  // a dumb property to force redraw
+    assert.equal(appRenderCount, 2);
+    assert.equal(itemRenderCount, 1); // item would not redraw
+    state.set('name', 'johnson');
+    assert.equal(appRenderCount, 3);
+    assert.equal(itemRenderCount, 2); // item would not redraw
+  });
 });
