@@ -69,7 +69,6 @@ function scu(nextProps, nextState) {
 
 function pure(Clazz) {
   var React = require('react');
-  if (Clazz.prototype.shouldComponentUpdate === scu) return Clazz;
   Clazz.prototype.shouldComponentUpdate = scu;
 
   // 包装一层
