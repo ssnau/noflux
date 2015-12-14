@@ -1,16 +1,18 @@
-const PROP = "__pure_props";
-const NEXTPROP = "__pure_next_props";
+"use strict";
+
+var PROP = "__pure_props";
+var NEXTPROP = "__pure_next_props";
 
 function each(obj, fn) {
-    Object.keys(obj).forEach(function(key) {
-       fn(key, obj[key]); 
-    });
+  Object.keys(obj).forEach(function (key) {
+    fn(key, obj[key]);
+  });
 }
 
-function noop(){}
+function noop() {}
 
 function isCursor(val) {
-    return typeof val === 'function' && val.get && val.update;
+  return typeof val === 'function' && val.get && val.update;
 }
 
 /**
@@ -23,8 +25,7 @@ function isCursor(val) {
 function shallowEqual(objA, objB) {
   if (objA === objB) return true;
 
-  if (typeof objA !== 'object' || objA === null ||
-      typeof objB !== 'object' || objB === null) {
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
     return false;
   }
 
@@ -45,14 +46,14 @@ function shallowEqual(objA, objB) {
 }
 
 function equal(a, b) {
- if (isCursor(a) && isCursor(b)) return a() === b();
- return a === b;
+  if (isCursor(a) && isCursor(b)) return a() === b();
+  return a === b;
 }
 
 function assignTo(provider, receiver) {
   each(provider, function (key, val) {
     receiver[key] = val;
-    if (isCursor(val)) receiver['_cursor_val_' + key]  = val();
+    if (isCursor(val)) receiver['_cursor_val_' + key] = val();
   });
 }
 
@@ -60,14 +61,11 @@ function pure(Clazz) {
   // no instrumentation for server-side.
   if (typeof window === 'undefined') return Clazz;
 
-  const rewrites = {
+  var rewrites = {
     'shouldComponentUpdate': function pureShouldComponentUpdate(nextProps, nextState) {
       this[NEXTPROP] = {};
       assignTo(nextProps, this[NEXTPROP]);
-      return (
-        !shallowEqual(this[PROP] || {}, this[NEXTPROP]) ||
-        !shallowEqual(this.state, nextState)
-      );
+      return !shallowEqual(this[PROP] || {}, this[NEXTPROP]) || !shallowEqual(this.state, nextState);
     },
     // no way to guarantee `componentWillReceiveProps` will be called.
     // if the underlying value of cursor changed but cursor stay unchanged,
@@ -85,7 +83,7 @@ function pure(Clazz) {
     }
   };
 
-  const proto = Clazz.prototype;
+  var proto = Clazz.prototype;
   each(rewrites, function (key, fn) {
     var originalFn = proto[key] || noop;
     // for performance reason, no `arguments`
