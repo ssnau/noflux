@@ -34,7 +34,7 @@
     "sinon": "^1.14.1"
   },
   "dependencies": {
-    "dataton": "^1.5.1",
+    "dataton": "^1.6.1",
     "envify": "^3.0.0"
   },
   "directories": {
