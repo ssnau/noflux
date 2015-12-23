@@ -49,6 +49,11 @@ a function works as decrocation to bind a React class with `state`.
 `state` will emit `change` event after its modification and the instance
 of the class will be re-rendered.
 
+### pure
+
+a function works as decrocation to make a React class as a pure render component even though you pass cursors
+as props.
+
 ### state
 
 A instance of [dataton](http://npmjs.com/package/dataton) which implemented Copy-On-Write technique. You can:
