@@ -1,9 +1,13 @@
-2.2.1 (2015-12-23)
+2.2.3 (2015-12-23)
+
+- update dataton dep version
+
+2.2.2 (2015-12-23)
 
 - add change log 
 - add travis ci support
 
-2.2.1 (2015-12-14)
+2.2.0 (2015-12-14)
 
 - [feature] update pure render decorator
 
