@@ -1,6 +1,6 @@
 {
   "name": "noflux",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "a simple top down data flow implementation",
   "main": "index.js",
   "scripts": {
