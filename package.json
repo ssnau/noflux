@@ -29,7 +29,7 @@
     "jsdom": "^5.4.3",
     "mocha": "^2.2.5",
     "mocha-lcov-reporter": "0.0.2",
-    "react": ">0.10",
+    "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.3",
     "sinon": "^1.14.1"
   },
