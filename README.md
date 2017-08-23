@@ -1,3 +1,11 @@
+# [DEPRECATED] This project is deprecated in favor of [the @noflux project](https://github.com/nofluxjs/noflux)
+
+* A migration document can be found [here](https://noflux.js.org/en/advanced/migration.html).
+
+* 迁移文档请见[这里](https://noflux.js.org/zh/advanced/migration.html)。
+
+---
+
 [![Build Status](https://travis-ci.org/ssnau/noflux.svg?branch=master)](https://travis-ci.org/ssnau/noflux)
 
 noflux
